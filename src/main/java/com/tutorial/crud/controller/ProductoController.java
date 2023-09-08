@@ -64,7 +64,7 @@ public class ProductoController {
           new Mensaje("El nombre " + productoDto.getNombre() + " ya se encuentra registrado"), HttpStatus.BAD_REQUEST);
     Product producto = new Product(productoDto.getNombre(), productoDto.getPrecio());
     productoService.save(producto);
-    return new ResponseEntity<Mensaje>(new Mensaje("Prodcto creado con exito"), HttpStatus.CREATED);
+    return new ResponseEntity<Mensaje>(new Mensaje("Producto creado con exito"), HttpStatus.CREATED);
   }
 
   @PutMapping("/{id}")

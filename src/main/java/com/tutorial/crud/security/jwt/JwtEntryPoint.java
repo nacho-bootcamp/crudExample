@@ -12,6 +12,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tutorial.crud.dto.Mensaje;
+
 @Component
 public class JwtEntryPoint implements AuthenticationEntryPoint {
   private final static Logger logger = LoggerFactory.getLogger(JwtEntryPoint.class);
@@ -20,6 +23,10 @@ public class JwtEntryPoint implements AuthenticationEntryPoint {
   public void commence(HttpServletRequest req, HttpServletResponse res, AuthenticationException e)
       throws IOException, ServletException {
     logger.error("Error en el metodo commence");
-    res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No autorizado");
+    res.setHeader("Content-Type", "application/json");
+    res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+    ObjectMapper objectMapper = new ObjectMapper();
+    System.out.println("paso por aqui");
+    res.getWriter().write(objectMapper.writeValueAsString(new Mensaje("No autorizado")));
   }
 }
